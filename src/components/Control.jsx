@@ -52,12 +52,7 @@ const Control = ({ jsondata }) => {
       setRotate("none");
     }
   };
-  // useEffect(() => {
-  //   audioPlayer.current.readyState>0?console.log("bahut ache"):console.log("burrrrrrreee")
-  //   const prevValue = isPlaying;
-  //   setIsPlaying(prevValue);
-  //    },[TooglePlayPause]);
-  // console.log(audioPlayer.current)
+
 
   const whilePlaying = () => {
     progressBar.current.value = audioPlayer.current.currentTime;
@@ -104,12 +99,12 @@ const Control = ({ jsondata }) => {
     progressBar.current.style.setProperty("--seek-before-width", `0%`);
   };
 
-  // useEffect(() => {
-  //   if (duration == currentTime) {
-  //     skipSongForward();
-  //     // TooglePlayPause();
-  //   }
-  // }, [currentTime]);
+  useEffect(() => {
+    if (duration == currentTime) {
+      skipSongForward();
+      // TooglePlayPause();
+    }
+  }, [currentTime]);
 
   return (
     <>
