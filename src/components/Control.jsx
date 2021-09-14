@@ -12,25 +12,24 @@ import { MdRepeat } from "react-icons/md";
 import { RiPlayListFill } from "react-icons/ri";
 import { HiVolumeUp } from "react-icons/hi";
 
-const Control = ({ jsondata }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+const Control = (props) => {
+
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [rotate, setRotate] = useState("none");
   // const [loading, setLoading] = useState(true);
   
   //reference
-  const audioPlayer = useRef();
+
   const progressBar = useRef();
   const animationRef = useRef();
 
   useEffect(() => {
-    const seconds = Math.floor(audioPlayer.current.duration);
+    const seconds = Math.floor(props.audioPlayer.current.duration);
     setDuration(seconds);
     progressBar.current.max = seconds;
-  }, [audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState]);
-  // console.log(audioPlayer?.current?.loadedmetadata,audioPlayer?.current?.readyState)
+  }, [props.audioPlayer?.current?.loadedmetadata, props.audioPlayer?.current?.readyState]);
+ 
   const calculateTime = (secs) => {
     const minutes = Math.floor(secs / 60);
     const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
@@ -38,31 +37,35 @@ const Control = ({ jsondata }) => {
     const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
     return `${returnedMinutes}:${returnedSeconds}`;
   };
+  
 
+
+  const whilePlaying = () => {
+    progressBar.current.value = props.audioPlayer.current.currentTime;
+    changePlayerCurrentTime();
+    animationRef.current = requestAnimationFrame(whilePlaying);
+    props.audioPlayer.current.volume = 0.8;
+  };
+
+
+
+
+  const prevValue = props.isPlaying;
   const TooglePlayPause = () => {
-    const prevValue = isPlaying;
-    setIsPlaying(!prevValue);
+    props.setIsPlaying(!prevValue);
     if (!prevValue) {
-      audioPlayer.current.play();
+      props.audioPlayer.current.play();
       animationRef.current = requestAnimationFrame(whilePlaying);
       setRotate("rotatePlayer 3s linear infinite");
     } else {
-      audioPlayer.current.pause();
+      props.audioPlayer.current.pause();
       // cancelAnimationFrame(animationRef.current);
       setRotate("none");
     }
   };
 
-
-  const whilePlaying = () => {
-    progressBar.current.value = audioPlayer.current.currentTime;
-    changePlayerCurrentTime();
-    animationRef.current = requestAnimationFrame(whilePlaying);
-    audioPlayer.current.volume = 0.4;
-  };
-
   const changeRange = () => {
-    audioPlayer.current.currentTime = progressBar.current.value;
+    props.audioPlayer.current.currentTime = progressBar.current.value;
     changePlayerCurrentTime();
   };
   const changePlayerCurrentTime = () => {
@@ -83,19 +86,16 @@ const Control = ({ jsondata }) => {
     changeRange();
   };
   const skipSongForward = () => {
-    setCurrentIndex((currentIndex + 1) % jsondata.length);
+    props.setCurrentIndex((props.currentIndex + 1) % props.jsondata.length);
     setCurrentTime("0");
     changeRange();
     progressBar.current.style.setProperty("--seek-before-width", `0%`);
-    if (isPlaying) {
-      const prevValue = isPlaying;
-      setIsPlaying(!prevValue);
-      setRotate("none");
-    }
+   
   };
   const skipSongBackward = () => {
-    setCurrentIndex((currentIndex - 1 + jsondata.length) % jsondata.length);
+    props.setCurrentIndex((props.currentIndex - 1 + props.jsondata.length) % props.jsondata.length);
     setCurrentTime("0");
+    changeRange();
     progressBar.current.style.setProperty("--seek-before-width", `0%`);
   };
 
@@ -106,28 +106,50 @@ const Control = ({ jsondata }) => {
     }
   }, [currentTime]);
 
+
+  // const play = () => {
+  //   TooglePlayPause()
+  //  }
+  // useEffect(() => {
+  //   play()
+  //   console.log("Play")
+    
+  // },[]);
+
+//  if (audioPlayer?.current?.readyState==0){
+//    console.log("nhi")
+//  }else{
+//    console.log("bajunga")
+//  }
+
+  
+  
+
+
+
+
   return (
     <>
-      <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc} autoplay />
+      {/* <audio ref={props.audioPlayer} src={props.jsondata[props.currentIndex].musicSrc} autoPlay /> */}
       <div className="audioControl">
         <div className="Music-container">
           <img
             style={{ animation: rotate }}
-            src={jsondata[currentIndex].cover}
-            alt={jsondata[currentIndex].name}
+            src={props.jsondata[props.currentIndex].cover}
+            alt={props.jsondata[props.currentIndex].name}
             className="cover-image"
           />
           <p className="music-Title">
-            {jsondata[currentIndex].name}
+            {props.jsondata[props.currentIndex].name}
             <br />{" "}
             <span className="music-singer">
               {" "}
-              {jsondata[currentIndex].singer}
+              {props.jsondata[props.currentIndex].singer}
             </span>
           </p>
 
           <div className="music-button">
-            <button className="btn-center" title="Shuffle">
+            <button className="btn-center" title="Shuffle" >
               <FiShuffle />
             </button>
 
@@ -147,10 +169,10 @@ const Control = ({ jsondata }) => {
             </button>
             <button
               className="btn-center"
-              title={!isPlaying ? "Play" : "Pause"}
+              title={!prevValue ? "Play" : "Pause"}
               onClick={TooglePlayPause}
             >
-              {isPlaying ? <IoPause /> : <IoPlay />}
+              {prevValue ? <IoPause /> : <IoPlay />}
             </button>
             <button
               className="btn-center"

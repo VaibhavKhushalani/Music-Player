@@ -1,43 +1,45 @@
 import React from "react";
-import jsondata from "./s.json";
 import "./Player.css";
 
 
 
 
-const MusicList = () => {
-// const [currentIndex, setCurrentIndex] = useState(1);
 
-  // const audioPlayer = useRef();
-  // audioPlayer.current.play();
-// const Playmusic=()=>{
- 
-//   setCurrentIndex(jsondata[currentIndex].id)
-
-// console.log(currentIndex)
-// }
+const MusicList = (props) => {
+  const prevValue = props.isPlaying;
+const Playmusic=(e)=>{
+  props.setCurrentIndex(e.target.id-1)
+props.audioPlayer.current.play()
+if (!prevValue){
+props.setIsPlaying(!prevValue);
+}}
 
   return (
     <>
+       
       <div className="List-container">
         <div className="sidebar-logo">Trending Albums</div>
-        {/* <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc} /> */}
-        {jsondata.slice(0, 5).map((data) => {
-      //  console.log(data.id)
-          return (
+     
+        {props.jsondata.map((data) => {
+     
+     return(
+         
             <>
-      
+     
               <ul className="MusicList-navigation" key={data.id} >
                 <li >
-                  <a href="##"  >
+                  <a href="##" type="button" id={data.id} onClick={Playmusic}>
+                   
                     {data.id} &nbsp; {data.name}
                     <span className="detail-List">By- {data.singer}</span>
+                   
                   </a>
                 </li>
               </ul>
+             
             </>
-          );
-        })}
+           );
+        })} 
       </div>
     </>
   );
