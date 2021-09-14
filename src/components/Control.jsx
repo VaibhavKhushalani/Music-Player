@@ -107,30 +107,14 @@ const Control = (props) => {
   }, [currentTime]);
 
 
-  // const play = () => {
-  //   TooglePlayPause()
-  //  }
-  // useEffect(() => {
-  //   play()
-  //   console.log("Play")
-    
-  // },[]);
 
-//  if (audioPlayer?.current?.readyState==0){
-//    console.log("nhi")
-//  }else{
-//    console.log("bajunga")
-//  }
-
-  
-  
 
 
 
 
   return (
     <>
-      {/* <audio ref={props.audioPlayer} src={props.jsondata[props.currentIndex].musicSrc} autoPlay /> */}
+     
       <div className="audioControl">
         <div className="Music-container">
           <img
