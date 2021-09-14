@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { FiShuffle } from "react-icons/fi";
 import {
   IoPlaySkipForward,
@@ -14,20 +14,18 @@ import { HiVolumeUp } from "react-icons/hi";
 
 const Control = (props) => {
 
-  const [duration, setDuration] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [rotate, setRotate] = useState("none");
-  // const [loading, setLoading] = useState(true);
+
+ 
+
   
   //reference
 
-  const progressBar = useRef();
-  const animationRef = useRef();
+
 
   useEffect(() => {
     const seconds = Math.floor(props.audioPlayer.current.duration);
-    setDuration(seconds);
-    progressBar.current.max = seconds;
+    props.setDuration(seconds);
+    props.progressBar.current.max = seconds;
   }, [props.audioPlayer?.current?.loadedmetadata, props.audioPlayer?.current?.readyState]);
  
   const calculateTime = (secs) => {
@@ -41,9 +39,9 @@ const Control = (props) => {
 
 
   const whilePlaying = () => {
-    progressBar.current.value = props.audioPlayer.current.currentTime;
+    props.progressBar.current.value = props.audioPlayer.current.currentTime;
     changePlayerCurrentTime();
-    animationRef.current = requestAnimationFrame(whilePlaying);
+    props.animationRef.current = requestAnimationFrame(whilePlaying);
     props.audioPlayer.current.volume = 0.8;
   };
 
@@ -55,60 +53,58 @@ const Control = (props) => {
     props.setIsPlaying(!prevValue);
     if (!prevValue) {
       props.audioPlayer.current.play();
-      animationRef.current = requestAnimationFrame(whilePlaying);
-      setRotate("rotatePlayer 3s linear infinite");
+      props.animationRef.current = requestAnimationFrame(whilePlaying);
+      props.setRotate("rotatePlayer 3s linear infinite");
     } else {
       props.audioPlayer.current.pause();
       // cancelAnimationFrame(animationRef.current);
-      setRotate("none");
+      props.setRotate("none");
     }
   };
 
   const changeRange = () => {
-    props.audioPlayer.current.currentTime = progressBar.current.value;
+    props.audioPlayer.current.currentTime = props.progressBar.current.value;
     changePlayerCurrentTime();
   };
   const changePlayerCurrentTime = () => {
-    let totalprogressbar = (progressBar.current.value / duration) * 100;
-    progressBar.current.style.setProperty(
+    let totalprogressbar = (props.progressBar.current.value / props.duration) * 100;
+    props.progressBar.current.style.setProperty(
       "--seek-before-width",
       `${totalprogressbar}%`
     );
-    setCurrentTime(progressBar.current.value);
+    props.setCurrentTime(props.progressBar.current.value);
   };
 
   const backThirty = () => {
-    progressBar.current.value = progressBar.current.value - 30;
+    props.progressBar.current.value = props.progressBar.current.value - 30;
     changeRange();
   };
   const forwardThirty = () => {
-    progressBar.current.value = Number(progressBar.current.value) + 30;
+    props.progressBar.current.value = Number(props.progressBar.current.value) + 30;
     changeRange();
   };
   const skipSongForward = () => {
     props.setCurrentIndex((props.currentIndex + 1) % props.jsondata.length);
-    setCurrentTime("0");
+    props.setCurrentTime("0");
     changeRange();
-    progressBar.current.style.setProperty("--seek-before-width", `0%`);
+    props.progressBar.current.style.setProperty("--seek-before-width", `0%`);
    
   };
   const skipSongBackward = () => {
     props.setCurrentIndex((props.currentIndex - 1 + props.jsondata.length) % props.jsondata.length);
-    setCurrentTime("0");
+    props.setCurrentTime("0");
     changeRange();
-    progressBar.current.style.setProperty("--seek-before-width", `0%`);
+    props.progressBar.current.style.setProperty("--seek-before-width", `0%`);
   };
 
   useEffect(() => {
-    if (duration == currentTime) {
+    if (props.duration == props.currentTime) {
       skipSongForward();
       // TooglePlayPause();
     }
-  }, [currentTime]);
-
-
-
-
+  }, [props.currentTime]);
+  
+  
 
 
 
@@ -118,7 +114,7 @@ const Control = (props) => {
       <div className="audioControl">
         <div className="Music-container">
           <img
-            style={{ animation: rotate }}
+            style={{ animation: props.rotate }}
             src={props.jsondata[props.currentIndex].cover}
             alt={props.jsondata[props.currentIndex].name}
             className="cover-image"
@@ -177,19 +173,19 @@ const Control = (props) => {
               <MdRepeat />
             </button>
           </div>
-          <p className="start-time">{calculateTime(currentTime)}</p>
+          <p className="start-time">{calculateTime(props.currentTime)}</p>
           <div className="music-slider">
             <input
               type="range"
               defaultValue="0"
-              ref={progressBar}
+              ref={props.progressBar}
               onChange={changeRange}
               className="progressBar"
             />
           </div>
           <p className="end-time">
-            {duration
-              ? duration && !isNaN(duration) && calculateTime(duration)
+            {props.duration
+              ? props.duration && !isNaN(props.duration) && calculateTime(props.duration)
               : "00:00"}
           </p>
           <div className="right-element">
