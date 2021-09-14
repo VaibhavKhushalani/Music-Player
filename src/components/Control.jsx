@@ -104,12 +104,12 @@ const Control = ({ jsondata }) => {
     progressBar.current.style.setProperty("--seek-before-width", `0%`);
   };
 
-  useEffect(() => {
-    if (duration == currentTime) {
-      skipSongForward();
-      // TooglePlayPause();
-    }
-  }, [currentTime]);
+  // useEffect(() => {
+  //   if (duration == currentTime) {
+  //     skipSongForward();
+  //     // TooglePlayPause();
+  //   }
+  // }, [currentTime]);
 
   return (
     <>
