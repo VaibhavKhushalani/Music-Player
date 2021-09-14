@@ -1,0 +1,45 @@
+[
+	{
+	"id":"1",
+	"name": "Despacito",
+	"singer": "Luis Fonsi",
+	"cover":"http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg",
+	"musicSrc":"http://res.cloudinary.com/alick/video/upload/v1502689683/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_uyvqw9.mp3"
+  },
+  {
+	"id":"2",
+	"name": "Dorost Nemisham",
+	"singer": "Sirvan Khosravi",
+	"cover":"https://res.cloudinary.com/ehsanahmadi/image/upload/v1573758778/Sirvan-Khosravi-Dorost-Nemisham_glicks.jpg",
+	"musicSrc":"https://res.cloudinary.com/ehsanahmadi/video/upload/v1573550770/Sirvan-Khosravi-Dorost-Nemisham-128_kb8urq.mp3"
+  },
+  {
+	"id":"3",
+	"name": "Aa Pavitra aatma",
+	"singer": "Unknown",
+	"cover":"https://i.pinimg.com/originals/b6/2f/87/b62f87dfd5373e71bb3f9eeeca88cf3d.jpg",
+	"musicSrc":"https://drive.google.com/uc?export=download&id=1t5h8twfH56mRJfDzLRDpcbB7H4BrSAEj"
+  },
+  {
+	"id":"4",
+	"name": "Bad Guy",
+	"singer": "Billie Eilish",
+	"cover":"https://i1.sndcdn.com/artworks-000581461793-9q7bxf-t500x500.jpg",
+	"musicSrc":"https://mp3.filmisongs.com/go.php?id=Bad%20Guy%20Mp3%20Billie%20Eilish.mp3"
+  },
+  {
+	"id":"5",
+	"name": "Aaya mashih duniya m tu",
+	"singer": "Unknown",
+	"cover":"https://i.pinimg.com/originals/b6/2f/87/b62f87dfd5373e71bb3f9eeeca88cf3d.jpg",
+	"musicSrc":"https://drive.google.com/uc?export=download&id=1919ehWFrvge55CgAa5j66y7efTc1YW-5"
+  },
+  {
+	"id":"6",
+	"name": "Jab kisi ne mujhse kaha chalo",
+	"singer": "Unknown",
+	"cover":"https://i.pinimg.com/originals/b6/2f/87/b62f87dfd5373e71bb3f9eeeca88cf3d.jpg",
+	"musicSrc":"https://drive.google.com/uc?export=download&id=1YGcksqid8UtYni4nfXYCfhDXN_GqRuNO"
+  }
+  
+]

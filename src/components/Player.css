@@ -1,0 +1,476 @@
+/* Player css */
+.audioControl {
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  background-color: #282c34;
+  height: 70px;
+  overflow: hidden;
+}
+.Music-container {
+  display: flex;
+}
+.music-Title {
+  color: #fff;
+  letter-spacing: 1px;
+  font-family: monospace;
+  font-size: 16px;
+  padding-left: 10px;
+  margin-top: 10px;
+  width: 100%;
+}
+.music-singer {
+  color: grey;
+  letter-spacing: 1px;
+  font-family: monospace;
+  font-size: 12px;
+}
+.cover-image {
+  width: 50px;
+  padding: 5px;
+  height: 50px;
+  margin-left: 25px;
+  margin-top: 5px;
+  border-radius: 50%;
+ 
+}
+.anime{
+  animation: rotatePlayer 3s linear infinite;
+}
+@keyframes rotatePlayer {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.music-button {
+  display: flex;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  margin-top: 10px;
+  position: absolute;
+  height: 24px;
+  background-color: transparent;
+}
+.btn-center {
+  background-color: transparent;
+  color: #a2a4a7;
+  border: none;
+  outline: none;
+  font-size: 26px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.btn-center:hover {
+  color: #d95117;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.music-slider {
+  left: 20%;
+    right: 20%;
+    position: absolute;
+    width: 60%;
+    bottom: 10px;
+}
+
+.progressBar {
+  --bar-bg:#a2a4a7;
+  --seek-before-width:0;
+  --seek-before-color:  #ff4d00  ;
+  --knobby:#ff4d00  ;
+  --selectedKnobby: #ff4d00;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--bar-bg);
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 10px;
+
+}
+.progressBar:hover{
+  opacity: 1;
+}
+
+/* progressBar -safari */
+.progressBar::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background: var(--bar-bg);
+    outline: none;
+  border-radius: 10px;
+  
+}
+/* for firefox */
+.progressBar::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  background: var(--bar-bg);;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 10px;
+}
+.progressBar::-moz-focus-outer{
+  border:0;
+}
+
+/* progressbar -background */
+.progressBar::before{
+  content:'';
+  height:6px;
+  width:var(--seek-before-width);
+  background-color:var(--seek-before-color);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  position: absolute;
+   z-index: 2;
+  cursor: pointer;
+ 
+}
+
+/* progressBar --firefox */
+.progressBar::-moz-range-progress{
+  background-color:var(--seek-before-color);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height:6px;
+}
+/*knobby-chrome and safari*/
+.progressBar::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  height:12px;
+  width:12px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--knobby);
+  cursor:pointer;
+  position: relative;
+  margin: -3px 0 0 0;
+  z-index: 4;
+  box-sizing: border-box;
+}
+/* knobby while dragging--chrome and safari */
+.progressBar:active::-webkit-slider-thumb{
+  transform: scale(1.2);
+  background-color: var(--selectedKnobby);
+}
+/* knobby --firefox */
+.progressBar::-moz-range-thumb
+{
+  height:12px;
+  width:12px;
+  border-radius: 50%;
+  border: transparent;
+  background-color: var(--knobby);
+  cursor:pointer;
+  position: relative;
+  margin: -3px 0 0 0;
+  z-index: 4;
+  box-sizing: border-box;
+}
+/* knobbywhile dragging --firefox */
+.progressBar:active::-moz-range-thumb{
+  transform: scale(1.2);
+  background-color: var(--selectedKnobby);
+}
+
+
+
+.start-time,
+.end-time {
+  color: #a2a4a7;
+  font-size: 12px;
+}
+.end-time {
+  color: #a2a4a7;
+  font-size: 12px;
+  position: absolute;
+  right: 257px;
+  bottom: 25px;
+  display: grid;
+  justify-content: center;
+}
+.start-time {
+  color: #a2a4a7;
+  font-size: 12px;
+  position: absolute;
+  left: 255px;
+  bottom: 25px;
+  display: grid;
+  justify-content: center;
+}
+
+
+.right-element {
+  position: absolute;
+  right: 0;
+
+  margin-top: 15px;
+ }
+ .btn-right{
+  background-color: transparent;
+  color: #a2a4a7  ;
+  border: none;
+  outline: none;
+  font-size: 26px;
+  float: right;
+padding-left: 20px;
+padding-right: 40px;
+}
+.btn-right:hover{
+  color:  #d95117;
+  font-size: 25px;
+  cursor: pointer;
+  }
+
+.volume-slider{
+  margin-right: 0px;
+
+}
+  #volumeRange{
+    position: relative;
+    height: 75px;
+    width: 120px;
+    padding: 10px;
+    margin-top: -150px;
+    -webkit-appearance: slider-vertical;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+    border-radius: 5px;
+    display:none;
+  
+  }
+  #volumeRange::-webkit-slider-thumb {
+    -webkit-appearance:none;
+    appearance: none;
+    width: 40px;
+    height: 5px;
+    background-color: #d95117;
+    cursor:grab;
+  }
+  
+  #volumeRange::-moz-range-thumb {
+    width: 25px;
+    height: 5px;
+    background: #d95117;
+    cursor:grab
+  }
+
+  .btn-right:hover #volumeRange  {
+    display: block;
+      background-color: #0000003b;
+      padding-left: 0px;
+      padding-right: 0px;
+     margin-left:-100px
+ }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Sidebar css */
+.sidebar-container {
+  position: fixed;
+  width: 220px;
+  height: 100%;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #1b1f25;
+  color: #fff;
+}
+
+.content-container {
+  padding-top: 20px;
+}
+
+.sidebar-navigation {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  position: relative;
+  margin-top: 20px;
+}
+
+.sidebar-navigation li {
+  background-color: transparent;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  line-height: 20px;
+}
+
+.sidebar-navigation li a {
+  padding: 10px 15px 10px 30px;
+  display: block;
+  color: rgb(224, 216, 216);
+  text-decoration: none;
+  font-size: 15px;
+  font-family: sans-serif;
+  letter-spacing: 0px;
+}
+
+.sidebar-navigation li a:active,
+.sidebar-navigation li a:hover,
+.sidebar-navigation li a:focus {
+  text-decoration: none;
+  outline: none;
+  color: #d95117;
+}
+
+.sidebar-navigation li::before {
+  background-color: #d95117;
+  position: absolute;
+  content: "";
+  height: 100%;
+  left: 0;
+  top: 0;
+  -webkit-transition: width 0.2s ease-in;
+  transition: width 0.2s ease-in;
+  width: 0px;
+  z-index: -1;
+}
+
+.sidebar-navigation li:hover::before {
+  width: 2%;
+  border-radius: 20px;
+}
+
+.sidebar-navigation .header {
+  font-size: 11px;
+  text-transform: uppercase;
+  background-color: #1b1f25;
+  padding: 30px 15px 2px 30px;
+  color: grey;
+  letter-spacing: 1px;
+  font-family: monospace;
+}
+
+.sidebar-navigation .header::before {
+  background-color: transparent;
+}
+
+.content-container {
+  padding-left: 220px;
+}
+
+/* Music-List css */
+.MusicList-navigation {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  position: relative;
+  margin-top: 20px;
+}
+
+.MusicList-navigation li {
+  background-color: transparent;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  line-height: 20px;
+}
+
+.MusicList-navigation li a {
+  padding: 10px 15px 10px 30px;
+  display: block;
+  color: rgb(224, 216, 216);
+  text-decoration: none;
+  font-size: 15px;
+  font-family: sans-serif;
+  letter-spacing: 0px;
+  list-style-type: upper-roman;
+}
+
+.MusicList-navigation li a:active,
+.MusicList-navigation li a:hover {
+  text-decoration: none;
+  outline: none;
+  background-color: #232830;
+  transition: all 0.5s ease-in;
+}
+
+.MusicList-navigation li::before {
+  background-color: #d95117;
+  position: absolute;
+  content: "";
+  height: 100%;
+  left: 0;
+  top: 0;
+  -webkit-transition: width 0.4s ease-in;
+  transition: width 0.4s ease-in;
+  width: 0px;
+  z-index: 1;
+}
+
+.MusicList-navigation li:hover::before {
+  width: 1%;
+  border-radius: 20px;
+}
+
+.MusicList-navigation .header {
+  font-size: 11px;
+  text-transform: uppercase;
+  background-color: #1b1f25;
+  padding: 30px 15px 2px 30px;
+  color: grey;
+  letter-spacing: 1px;
+  font-family: monospace;
+}
+
+.MusicList-navigation .header::before {
+  background-color: transparent;
+}
+
+.List-container {
+  position: fixed;
+  width: 350px;
+  height: 100%;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #1b1f25;
+  color: #fff;
+}
+.sidebar-logo {
+  padding: 20px 10px 10px 20px;
+  font-size: 20px;
+}
+
+.detail-List {
+  font-size: 14px;
+  padding: 10px 10px 11px 20px;
+  display: none;
+  transition: all 1s ease-in-out;
+}
+.MusicList-navigation li a:hover .detail-List {
+  display: block;
+}
