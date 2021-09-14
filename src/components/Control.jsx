@@ -88,6 +88,11 @@ const Control = (props) => {
     props.setCurrentTime("0");
     changeRange();
     props.progressBar.current.style.setProperty("--seek-before-width", `0%`);
+    if (!prevValue){
+      props.setIsPlaying(!prevValue);
+      props.animationRef.current = requestAnimationFrame(whilePlaying);
+      props.setRotate("rotatePlayer 3s linear infinite");
+      }
    
   };
   const skipSongBackward = () => {
@@ -95,6 +100,11 @@ const Control = (props) => {
     props.setCurrentTime("0");
     changeRange();
     props.progressBar.current.style.setProperty("--seek-before-width", `0%`);
+    if (!prevValue){
+      props.setIsPlaying(!prevValue);
+      props.animationRef.current = requestAnimationFrame(whilePlaying);
+      props.setRotate("rotatePlayer 3s linear infinite");
+      }
   };
 
   useEffect(() => {
