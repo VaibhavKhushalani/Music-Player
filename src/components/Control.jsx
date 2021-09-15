@@ -19,6 +19,7 @@ const Control = (props) => {
     const seconds = Math.floor(props.audioPlayer.current.duration);
     props.setDuration(seconds);
     props.progressBar.current.max = seconds;
+    props.animationRef.current = requestAnimationFrame(whilePlaying);
   }, [props.audioPlayer?.current?.loadedmetadata, props.audioPlayer?.current?.readyState]);
  
   const calculateTime = (secs) => {
