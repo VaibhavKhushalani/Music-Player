@@ -30,6 +30,7 @@ const MusicList = (props) => {
         props.animationRef.current = requestAnimationFrame(whilePlaying);
         props.setRotate("rotatePlayer 3s linear infinite");
         props.audioPlayer.current.play();
+  
       }
     }
   };

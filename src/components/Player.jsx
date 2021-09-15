@@ -24,7 +24,7 @@ const Player = () => {
   return (
     <>
    
-     <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc}  />
+     <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc} autoPlay />
       <Sidebar />
 
       
