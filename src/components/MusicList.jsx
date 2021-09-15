@@ -25,7 +25,6 @@ const MusicList = (props) => {
       props.audioPlayer.current.play();
       
       if (!prevValue) {
-        console.log(e.target.id)
         props.setIsPlaying(!prevValue);
         props.animationRef.current = requestAnimationFrame(whilePlaying);
         props.setRotate("rotatePlayer 3s linear infinite");

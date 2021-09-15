@@ -4,8 +4,8 @@
   bottom: 0;
   position: absolute;
   background-color: #282c34;
-  height: 70px;
-  overflow: hidden;
+  height: 80px;
+
 }
 .Music-container {
   display: flex;
@@ -209,75 +209,144 @@
   justify-content: center;
 }
 
+.right-element{
+float: left;
+margin:15px 80px 0px 0px;
+overflow:hidden;
+}
 
-.right-element {
-  position: absolute;
-  right: 0;
+.btn-right:hover .volumeRange   {
+  display: block;
+}
 
-  margin-top: 15px;
- }
- .btn-right{
+.btn-right{
   background-color: transparent;
-  color: #a2a4a7  ;
+  color: #a2a4a7;
   border: none;
   outline: none;
   font-size: 26px;
-  float: right;
-padding-left: 20px;
-padding-right: 40px;
+  padding-left: 10px;
+  padding-right: 0px;
+  margin:0px 10px 0px 0px;
 }
-.btn-right:hover{
-  color:  #d95117;
-  font-size: 25px;
+.btn-right:hover {
+  color: #d95117;
   cursor: pointer;
-  }
-
-.volume-slider{
-  margin-right: 0px;
-
+  /* background-color:rgba(0, 0, 0, 0.192);
+  border-radius: 10px;  */
 }
-  #volumeRange{
-    position: relative;
-    height: 75px;
-    width: 120px;
-    padding: 10px;
-    margin-top: -150px;
-    -webkit-appearance: slider-vertical;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: 0.2s;
-    transition: opacity 0.2s;
-    border-radius: 5px;
-    display:none;
-  
-  }
-  #volumeRange::-webkit-slider-thumb {
-    -webkit-appearance:none;
-    appearance: none;
-    width: 40px;
-    height: 5px;
-    background-color: #d95117;
-    cursor:grab;
-  }
-  
-  #volumeRange::-moz-range-thumb {
-    width: 25px;
-    height: 5px;
-    background: #d95117;
-    cursor:grab
-  }
 
-  .btn-right:hover #volumeRange  {
-    display: block;
-      background-color: #0000003b;
-      padding-left: 0px;
-      padding-right: 0px;
-     margin-left:-100px
- }
+
+.volumeRange {
+  --bar-bg:#a2a4a7;
+  --seek-before-width:0%;
+  --seek-before-color:  #ff4d00  ;
+  --knobby:#ff4d00  ;
+  --selectedKnobby: #ff4d00;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #a2a4a7;;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  border-radius: 10px;
+  /* display:none */
+}
+
+
+.volumeRange:hover {
+  opacity: 1;
  
+}
+/* progressBar -safari */
+.volumeRange::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background: var(--bar-bg);
+    outline: none;
+  border-radius: 10px;
+  
+}
+/* for firefox */
+.volumeRange::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  background: var(--bar-bg);;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  border-radius: 10px;
+}
+.volumeRange::-moz-focus-outer{
+  border:0;
+}
+
+/* volumeRange -background */
+.volumeRange::before{
+  content:'';
+  height:6px;
+  width:var(--seek-before-width);
+  background-color:var(--seek-before-color);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+ position:absolute;
+   z-index: 2;
+  cursor: pointer;
+  max-width: 7.6%;
+ }
 
 
 
+/* volumeRange --firefox */
+.volumeRange::-moz-range-progress{
+  background-color:var(--seek-before-color);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  height:6px;
+}
+
+
+/*knobby-chrome and safari*/
+.volumeRange::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  height:12px;
+  width:12px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--knobby);
+  cursor:pointer;
+  position: relative;
+  margin: -3px 0 0 0;
+  z-index: 4;
+  box-sizing: border-box;
+}
+/* knobby while dragging--chrome and safari */
+.volumeRange:active::-webkit-slider-thumb{
+  transform: scale(1.2);
+  background-color: var(--selectedKnobby);
+}
+/* knobby --firefox */
+.volumeRange::-moz-range-thumb
+{
+  height:12px;
+  width:12px;
+  border-radius: 50%;
+  border: transparent;
+  background-color: var(--knobby);
+  cursor:pointer;
+  position: relative;
+  margin: -3px 0 0 0;
+  z-index: 4;
+  box-sizing: border-box;
+}
+/* knobbywhile dragging --firefox */
+.volumeRange:active::-moz-range-thumb{
+  transform: scale(1.2);
+  background-color: var(--selectedKnobby);
+}
 
 
 

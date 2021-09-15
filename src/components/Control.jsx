@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FiShuffle } from "react-icons/fi";
 import {
   IoPlaySkipForward,
@@ -9,10 +9,11 @@ import {
   IoPlayBack,
 } from "react-icons/io5";
 import { MdRepeat } from "react-icons/md";
-import { RiPlayListFill } from "react-icons/ri";
 import { HiVolumeUp } from "react-icons/hi";
 
 const Control = (props) => {
+  const [volslider, setVolslider] = useState(1);
+  const volumeRange = useRef();
 
 
   useEffect(() => {
@@ -20,8 +21,11 @@ const Control = (props) => {
     props.setDuration(seconds);
     props.progressBar.current.max = seconds;
     props.animationRef.current = requestAnimationFrame(whilePlaying);
-  }, [props.audioPlayer?.current?.loadedmetadata, props.audioPlayer?.current?.readyState]);
- 
+  }, [
+    props.audioPlayer?.current?.loadedmetadata,
+    props.audioPlayer?.current?.readyState,
+  ]);
+
   const calculateTime = (secs) => {
     const minutes = Math.floor(secs / 60);
     const returnedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
@@ -29,25 +33,17 @@ const Control = (props) => {
     const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
     return `${returnedMinutes}:${returnedSeconds}`;
   };
-  
-
 
   const whilePlaying = () => {
     props.progressBar.current.value = props.audioPlayer.current.currentTime;
     changePlayerCurrentTime();
     props.animationRef.current = requestAnimationFrame(whilePlaying);
-    props.audioPlayer.current.volume = 0.8;
   };
-
-
-
 
   const prevValue = props.isPlaying;
   const TooglePlayPause = () => {
-  
     props.setIsPlaying(!prevValue);
     if (!prevValue) {
-  
       props.audioPlayer.current.play();
       props.animationRef.current = requestAnimationFrame(whilePlaying);
       props.setRotate("rotatePlayer 3s linear infinite");
@@ -58,15 +54,24 @@ const Control = (props) => {
     }
   };
 
-
-
-
+  const changeVolume = (e) => {
+    setVolslider(e.target.valueAsNumber)
+    let finalVolume =  volslider ** 1
+    volumeRange.current.style.setProperty("--seek-before-width",`${finalVolume.toFixed(0)}%`)
+    let volume =finalVolume.toFixed(0)*0.125
+    props.audioPlayer.current.volume = volume;
+    console.log( props.audioPlayer.current.volume);
+    
+    
+  };
+  
   const changeRange = () => {
     props.audioPlayer.current.currentTime = props.progressBar.current.value;
     changePlayerCurrentTime();
   };
   const changePlayerCurrentTime = () => {
-    let totalprogressbar = (props.progressBar.current.value / props.duration) * 100;
+    let totalprogressbar =
+      (props.progressBar.current.value / props.duration) * 100;
     props.progressBar.current.style.setProperty(
       "--seek-before-width",
       `${totalprogressbar}%`
@@ -79,7 +84,8 @@ const Control = (props) => {
     changeRange();
   };
   const forwardThirty = () => {
-    props.progressBar.current.value = Number(props.progressBar.current.value) + 30;
+    props.progressBar.current.value =
+      Number(props.progressBar.current.value) + 30;
     changeRange();
   };
   const skipSongForward = () => {
@@ -87,25 +93,24 @@ const Control = (props) => {
     props.setCurrentTime("0");
     changeRange();
     props.progressBar.current.style.setProperty("--seek-before-width", `0%`);
-    if (!prevValue){
-    
+    if (!prevValue) {
       props.setIsPlaying(!prevValue);
       props.animationRef.current = requestAnimationFrame(whilePlaying);
       props.setRotate("rotatePlayer 3s linear infinite");
-      }
-   
+    }
   };
   const skipSongBackward = () => {
-    props.setCurrentIndex((props.currentIndex - 1 + props.jsondata.length) % props.jsondata.length);
+    props.setCurrentIndex(
+      (props.currentIndex - 1 + props.jsondata.length) % props.jsondata.length
+    );
     props.setCurrentTime("0");
     changeRange();
     props.progressBar.current.style.setProperty("--seek-before-width", `0%`);
-    if (!prevValue){
-    
+    if (!prevValue) {
       props.setIsPlaying(!prevValue);
       props.animationRef.current = requestAnimationFrame(whilePlaying);
       props.setRotate("rotatePlayer 3s linear infinite");
-      }
+    }
   };
 
   useEffect(() => {
@@ -114,22 +119,16 @@ const Control = (props) => {
       // TooglePlayPause();
     }
   }, [props.currentTime]);
-  
+
   useEffect(() => {
     if (!prevValue) {
       props.setIsPlaying(prevValue);
       props.setRotate("none");
-     
-    
     }
   }, []);
-  
-
-
 
   return (
     <>
-     
       <div className="audioControl">
         <div className="Music-container">
           <img
@@ -148,7 +147,7 @@ const Control = (props) => {
           </p>
 
           <div className="music-button">
-            <button className="btn-center" title="Shuffle" >
+            <button className="btn-center" title="Shuffle">
               <FiShuffle />
             </button>
 
@@ -188,7 +187,7 @@ const Control = (props) => {
               <IoPlaySkipForward />
             </button>
 
-            <button className="btn-center" title="Loop">
+            <button className="btn-center" title="Loop" onClick={changeVolume}>
               <MdRepeat />
             </button>
           </div>
@@ -204,20 +203,26 @@ const Control = (props) => {
           </div>
           <p className="end-time">
             {props.duration
-              ? props.duration && !isNaN(props.duration) && calculateTime(props.duration)
+              ? props.duration &&
+                !isNaN(props.duration) &&
+                calculateTime(props.duration)
               : "00:00"}
           </p>
+          <button className="btn-right" >
+            <HiVolumeUp title="Volume" />
+          </button>
           <div className="right-element">
-            <button className="btn-right">
-              <HiVolumeUp className="volume-slider" title="Volume" />
-              <div>
-                <input type="range" min="0" max="100" id="volumeRange" />
-              </div>
-            </button>
-            <button className="btn-right">
-              <div className="Play-list"></div>
-              <RiPlayListFill />
-            </button>
+            <input
+              type="range"
+              ref={volumeRange}
+              min="0"
+              max="8"
+              step={0.02}
+              value={volslider}
+              onChange={changeVolume}
+              className="volumeRange"
+            />
+           
           </div>
         </div>
       </div>
