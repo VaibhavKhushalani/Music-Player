@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { FiShuffle } from "react-icons/fi";
 import {
   IoPlaySkipForward,
@@ -13,13 +13,6 @@ import { RiPlayListFill } from "react-icons/ri";
 import { HiVolumeUp } from "react-icons/hi";
 
 const Control = (props) => {
-
-
- 
-
-  
-  //reference
-
 
 
   useEffect(() => {
@@ -50,8 +43,10 @@ const Control = (props) => {
 
   const prevValue = props.isPlaying;
   const TooglePlayPause = () => {
+  
     props.setIsPlaying(!prevValue);
     if (!prevValue) {
+  
       props.audioPlayer.current.play();
       props.animationRef.current = requestAnimationFrame(whilePlaying);
       props.setRotate("rotatePlayer 3s linear infinite");
@@ -61,6 +56,9 @@ const Control = (props) => {
       props.setRotate("none");
     }
   };
+
+
+
 
   const changeRange = () => {
     props.audioPlayer.current.currentTime = props.progressBar.current.value;
@@ -89,6 +87,7 @@ const Control = (props) => {
     changeRange();
     props.progressBar.current.style.setProperty("--seek-before-width", `0%`);
     if (!prevValue){
+    
       props.setIsPlaying(!prevValue);
       props.animationRef.current = requestAnimationFrame(whilePlaying);
       props.setRotate("rotatePlayer 3s linear infinite");
@@ -101,6 +100,7 @@ const Control = (props) => {
     changeRange();
     props.progressBar.current.style.setProperty("--seek-before-width", `0%`);
     if (!prevValue){
+    
       props.setIsPlaying(!prevValue);
       props.animationRef.current = requestAnimationFrame(whilePlaying);
       props.setRotate("rotatePlayer 3s linear infinite");
@@ -114,6 +114,14 @@ const Control = (props) => {
     }
   }, [props.currentTime]);
   
+  useEffect(() => {
+    if (!prevValue) {
+      props.setIsPlaying(prevValue);
+      props.setRotate("none");
+      // TooglePlayPause();
+    
+    }
+  }, []);
   
 
 

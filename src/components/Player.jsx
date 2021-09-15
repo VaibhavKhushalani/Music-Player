@@ -11,6 +11,8 @@ const Player = () => {
   const [rotate, setRotate] = useState("none");
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+
+    //reference
   const audioPlayer = useRef();
   const progressBar = useRef();
   const animationRef = useRef();
@@ -22,7 +24,7 @@ const Player = () => {
   return (
     <>
    
-     <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc} autoPlay />
+     <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc} />
       <Sidebar />
 
       
