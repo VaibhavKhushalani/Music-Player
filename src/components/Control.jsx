@@ -115,8 +115,8 @@ const Control = (props) => {
   }, [props.currentTime]);
   
   useEffect(() => {
-    if (!prevValue) {
-      props.setIsPlaying(prevValue);
+    if (prevValue) {
+      props.setIsPlaying(!prevValue);
       props.setRotate("none");
       
     
