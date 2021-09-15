@@ -22,14 +22,14 @@ const MusicList = (props) => {
   const Playmusic = (e) => {
     if (e.target.id) {
       props.setCurrentIndex(e.target.id);
-
+      props.audioPlayer.current.play();
       
       if (!prevValue) {
         console.log(e.target.id)
         props.setIsPlaying(!prevValue);
         props.animationRef.current = requestAnimationFrame(whilePlaying);
         props.setRotate("rotatePlayer 3s linear infinite");
-        props.audioPlayer.current.play();
+       
   
       }
     }
