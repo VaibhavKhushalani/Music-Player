@@ -118,7 +118,7 @@ const Control = (props) => {
     if (!prevValue) {
       props.setIsPlaying(prevValue);
       props.setRotate("none");
-      props.audioPlayer.current.pause();
+      TooglePlayPause()
     
     }
   }, []);
