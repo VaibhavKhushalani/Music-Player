@@ -23,7 +23,7 @@ const MusicList = (props) => {
     if (e.target.id) {
       props.setCurrentIndex(e.target.id);
       props.audioPlayer.current.play();
-      
+      props.setAuto(true)
       if (!prevValue) {
         props.setIsPlaying(!prevValue);
         props.animationRef.current = requestAnimationFrame(whilePlaying);

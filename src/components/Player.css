@@ -239,7 +239,7 @@ overflow:hidden;
 
 .volumeRange {
   --bar-bg:#a2a4a7;
-  --seek-before-width:0%;
+  --seek-before-width:8%;
   --seek-before-color:  #ff4d00  ;
   --knobby:#ff4d00  ;
   --selectedKnobby: #ff4d00;

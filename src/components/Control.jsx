@@ -7,14 +7,26 @@ import {
   IoPlay,
   IoPlaySkipBack,
   IoPlayBack,
+  IoVolumeLow,
+  IoVolumeHigh,
+  IoVolumeMute,
+  IoVolumeMedium,
 } from "react-icons/io5";
-import { MdRepeat } from "react-icons/md";
-import { HiVolumeUp } from "react-icons/hi";
+import { MdRepeat, MdRepeatOne } from "react-icons/md";
 
 const Control = (props) => {
-  const [volslider, setVolslider] = useState(1);
+  const [volslider, setVolslider] = useState(8);
+  const [shuffle, setShuffle] = useState(false);
+  const [loop, setLoop] = useState("#a2a4a7");
   const volumeRange = useRef();
 
+  //random No Generator
+  function randomNumber(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  let shuffleOn = randomNumber(0, props.jsondata.length - 1);
 
   useEffect(() => {
     const seconds = Math.floor(props.audioPlayer.current.duration);
@@ -43,6 +55,7 @@ const Control = (props) => {
   const prevValue = props.isPlaying;
   const TooglePlayPause = () => {
     props.setIsPlaying(!prevValue);
+    props.setAuto(true);
     if (!prevValue) {
       props.audioPlayer.current.play();
       props.animationRef.current = requestAnimationFrame(whilePlaying);
@@ -55,16 +68,16 @@ const Control = (props) => {
   };
 
   const changeVolume = (e) => {
-    setVolslider(e.target.valueAsNumber)
-    let finalVolume =  volslider ** 1
-    volumeRange.current.style.setProperty("--seek-before-width",`${finalVolume.toFixed(0)}%`)
-    let volume =finalVolume.toFixed(0)*0.125
+    setVolslider(e.target.valueAsNumber);
+    let finalVolume = volslider ** 1;
+    volumeRange.current.style.setProperty(
+      "--seek-before-width",
+      `${finalVolume.toFixed(0)}%`
+    );
+    let volume = finalVolume.toFixed(0) * 0.125;
     props.audioPlayer.current.volume = volume;
-    console.log( props.audioPlayer.current.volume);
-    
-    
   };
-  
+
   const changeRange = () => {
     props.audioPlayer.current.currentTime = props.progressBar.current.value;
     changePlayerCurrentTime();
@@ -89,8 +102,11 @@ const Control = (props) => {
     changeRange();
   };
   const skipSongForward = () => {
-    props.setCurrentIndex((props.currentIndex + 1) % props.jsondata.length);
-    props.setCurrentTime("0");
+    props.setAuto(true)
+    shuffle == "#d95117"
+      ? props.setCurrentIndex(shuffleOn)
+      : props.setCurrentIndex((props.currentIndex + 1) % props.jsondata.length);
+      props.setCurrentTime("0");
     changeRange();
     props.progressBar.current.style.setProperty("--seek-before-width", `0%`);
     if (!prevValue) {
@@ -100,9 +116,13 @@ const Control = (props) => {
     }
   };
   const skipSongBackward = () => {
-    props.setCurrentIndex(
-      (props.currentIndex - 1 + props.jsondata.length) % props.jsondata.length
-    );
+    props.setAuto(true)
+    shuffle == "#d95117"
+      ? props.setCurrentIndex(shuffleOn)
+      : props.setCurrentIndex(
+          (props.currentIndex - 1 + props.jsondata.length) %
+            props.jsondata.length
+        );
     props.setCurrentTime("0");
     changeRange();
     props.progressBar.current.style.setProperty("--seek-before-width", `0%`);
@@ -116,16 +136,47 @@ const Control = (props) => {
   useEffect(() => {
     if (props.duration == props.currentTime) {
       skipSongForward();
-      // TooglePlayPause();
+    }
+    if (props.duration == props.currentTime && loop == "#d95117") {
+      props.setCurrentIndex(props.currentIndex % props.jsondata.length);
+      TooglePlayPause();
     }
   }, [props.currentTime]);
-
   useEffect(() => {
     if (!prevValue) {
       props.setIsPlaying(prevValue);
       props.setRotate("none");
     }
   }, []);
+
+  const shuffleSong = () => {
+    setShuffle("#d95117");
+    if (shuffle == "#d95117") {
+      setShuffle("#a2a4a7");
+    }
+  };
+
+  const Volumeicon = () => {
+    if (props.audioPlayer?.current?.volume > 0.7) {
+      return <IoVolumeHigh />;
+    } else if (props.audioPlayer?.current?.volume > 0.4) {
+      return <IoVolumeMedium />;
+    } else if (props.audioPlayer?.current?.volume == 0) {
+      return <IoVolumeMute />;
+    } else {
+      return <IoVolumeLow />;
+    }
+  };
+  useEffect(() => {
+    Volumeicon();
+  }, [props.audioPlayer?.current?.volume]);
+
+  const loopsong = () => {
+    setLoop("#d95117");
+    if (loop == "#d95117") {
+      setLoop("#a2a4a7");
+    }
+  };
 
   return (
     <>
@@ -147,7 +198,12 @@ const Control = (props) => {
           </p>
 
           <div className="music-button">
-            <button className="btn-center" title="Shuffle">
+            <button
+              className="btn-center"
+              title={shuffle == "#d95117" ? "shuffle on" : "shuffle off"}
+              onClick={shuffleSong}
+              style={{ color: shuffle }}
+            >
               <FiShuffle />
             </button>
 
@@ -187,8 +243,13 @@ const Control = (props) => {
               <IoPlaySkipForward />
             </button>
 
-            <button className="btn-center" title="Loop" onClick={changeVolume}>
-              <MdRepeat />
+            <button
+              className="btn-center"
+              title={loop == "#d95117" ? "Loop once" : "Loop all"}
+              style={{ color: loop }}
+              onClick={loopsong}
+            >
+              {loop == "#a2a4a7" ? <MdRepeat /> : <MdRepeatOne />}
             </button>
           </div>
           <p className="start-time">{calculateTime(props.currentTime)}</p>
@@ -208,8 +269,8 @@ const Control = (props) => {
                 calculateTime(props.duration)
               : "00:00"}
           </p>
-          <button className="btn-right" >
-            <HiVolumeUp title="Volume" />
+          <button className="btn-right">
+            <Volumeicon title="Volume" />
           </button>
           <div className="right-element">
             <input
@@ -222,7 +283,6 @@ const Control = (props) => {
               onChange={changeVolume}
               className="volumeRange"
             />
-           
           </div>
         </div>
       </div>
