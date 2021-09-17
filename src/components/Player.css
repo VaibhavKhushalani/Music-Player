@@ -3,11 +3,11 @@
   }
   body::-webkit-scrollbar {
     width: 12px;
-   
+    background-color: #232830;
   }
    
   body::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px #1b1f25;
+    box-shadow: inset 0 0 6px #232830;
   }
    
   body::-webkit-scrollbar-thumb {
@@ -276,7 +276,6 @@ overflow:hidden;
   -webkit-transition: .2s;
   transition: opacity .2s;
   border-radius: 10px;
-  /* display:none */
 }
 
 
@@ -589,6 +588,8 @@ z-index: 3;
 }
 .MusicList-navigation li a:hover .detail-List {
   display: block;
+  transition: all 1s ease-in-out;
+
 }
 
 /* MiddleComp Css */
@@ -641,7 +642,6 @@ z-index: 3;
 .card-img-top {
   width: 7em !important;
   height: 7em !important;
-  display:block;
 }
 
 .card-title{
