@@ -39,7 +39,7 @@ const Player = () => {
       
       <MusicList jsondata= {jsondata} audioPlayer={audioPlayer} progressBar={progressBar} animationRef={animationRef} isPlaying= {isPlaying} setIsPlaying={setIsPlaying} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}  rotate={rotate} setRotate={setRotate} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} setAuto={setAuto}/>
       
-      <MiddleComp  jsondata= {jsondata}/>
+      <MiddleComp jsondata= {jsondata} audioPlayer={audioPlayer} progressBar={progressBar} animationRef={animationRef} isPlaying= {isPlaying} setIsPlaying={setIsPlaying} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}  rotate={rotate} setRotate={setRotate} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} setAuto={setAuto}/>
 
 
       <Control jsondata= {jsondata} audioPlayer={audioPlayer} progressBar={progressBar} animationRef={animationRef} isPlaying= {isPlaying} setIsPlaying={setIsPlaying} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}  rotate={rotate} setRotate={setRotate} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} setAuto={setAuto} />
