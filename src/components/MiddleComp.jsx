@@ -42,7 +42,7 @@ if (e.target.id) {
      
         <Container>
           <Row>
-          {props.jsondata.map((data,id) => {
+          {props.jsondata.slice(0, 18).map((data,id) => {
               return(
             <Col xs={2}>
               
