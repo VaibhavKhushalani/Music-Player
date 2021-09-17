@@ -1,11 +1,31 @@
 /* Player css */
+#root {
+  background-color:#232830;
+  }
+  body::-webkit-scrollbar {
+    width: 12px;
+   
+  }
+   
+  body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px #1b1f25;
+  }
+   
+  body::-webkit-scrollbar-thumb {
+    background-color: #f07e4e;
+    outline: 1px solid #f07e4e;
+  }
+  body::-webkit-scrollbar-thumb:hover{
+    background-color:#d95117
+  }
+
 .audioControl {
   width: 100%;
   bottom: 0;
-  position: absolute;
+  position: fixed;
   background-color: #282c34;
   height: 80px;
-
+z-index: 2;
 }
 .Music-container {
   display: flex;
@@ -26,9 +46,9 @@
   font-size: 12px;
 }
 .cover-image {
-  width: 50px;
-  padding: 5px;
-  height: 50px;
+  width: 80px;
+  padding: 1px;
+  height: 62px;
   margin-left: 25px;
   margin-top: 5px;
   border-radius: 50%;
@@ -211,7 +231,7 @@
 
 .right-element{
 float: left;
-margin:15px 80px 0px 0px;
+margin:24px 80px 0px 0px;
 overflow:hidden;
 }
 
@@ -229,7 +249,7 @@ overflow:hidden;
   padding-right: 0px;
   margin:0px 10px 0px 0px;
 }
-.btn-right:hover {
+.btn-right:hover ,.btn-list:hover,.btn-listClose:hover {
   color: #d95117;
   cursor: pointer;
   /* background-color:rgba(0, 0, 0, 0.192);
@@ -368,7 +388,7 @@ overflow:hidden;
 /* Sidebar css */
 .sidebar-container {
   position: fixed;
-  width: 220px;
+  width: 180px;
   height: 100%;
   left: 0;
   overflow-x: hidden;
@@ -452,12 +472,27 @@ overflow:hidden;
 }
 
 /* Music-List css */
+.List-container::-webkit-scrollbar {
+  width: 7px;
+}
+ 
+.List-container::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px #1b1f25;
+}
+ 
+.List-container::-webkit-scrollbar-thumb {
+  background-color: #d95117;
+  outline: 1px solid #f07e4e;
+}
+
+
 .MusicList-navigation {
   padding: 0;
   margin: 0;
   list-style-type: none;
   position: relative;
   margin-top: 20px;
+
 }
 
 .MusicList-navigation li {
@@ -521,16 +556,22 @@ overflow:hidden;
 
 .List-container {
   position: fixed;
-  width: 350px;
+  width: 300px;
   height: 100%;
   right: 0;
   overflow-x: hidden;
   overflow-y: auto;
   background: #1b1f25;
   color: #fff;
+opacity: 0.9;
+ z-index: 1;
+}
+.List-container:hover{
+opacity: 1;
+z-index: 3;
 }
 .sidebar-logo {
-  padding: 20px 10px 10px 20px;
+  padding: 20px 20px 10px 32px;
   font-size: 20px;
 }
 
@@ -543,3 +584,67 @@ overflow:hidden;
 .MusicList-navigation li a:hover .detail-List {
   display: block;
 }
+
+/* MiddleComp Css */
+
+
+.MiddleComp{
+  background-color: #232830;
+  height: 100%;
+  width: 80%;
+  margin-left: 13em;
+}
+
+.btn-list{
+  background-color: transparent;
+  color: #a2a4a7;
+  border: none;
+  outline: none;
+  font-size: 26px;
+  float: right;
+  margin: -9px 0px 0px 0px;
+}
+.btn-listClose{
+  background-color: transparent;
+  color: #a2a4a7;
+  border: none;
+  outline: none;
+  font-size: 26px;
+  float: right;
+  padding: 15px 35px 0px 0px;
+}
+
+.middle-logo{
+ left:40%;
+ position: absolute;
+ margin-top: 20px;
+  color: #fff
+}
+.card{
+  width: 7em;
+  height: 12.5em;
+  margin: 7em 0px -2em 0px;
+  font-family: sans-serif;
+  background-color: #232830!important;
+  border: none !important;
+  outline: none;
+  z-index: 0;
+}
+.card-img-top {
+  width: 7em !important;
+  height: 7em !important;
+}
+.card-title{
+  font-size:15px !important;
+ color: rgba(255, 255, 255, 0.856);
+}
+.card-text{
+  font-size:10px;
+  white-space:nowrap;
+ color:rgb(180, 180, 180)
+}
+.card-img-top:hover{
+  opacity: 0.6;
+}
+
+

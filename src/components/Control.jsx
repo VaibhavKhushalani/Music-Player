@@ -102,11 +102,11 @@ const Control = (props) => {
     changeRange();
   };
   const skipSongForward = () => {
-    props.setAuto(true)
+    props.setAuto(true);
     shuffle == "#d95117"
       ? props.setCurrentIndex(shuffleOn)
       : props.setCurrentIndex((props.currentIndex + 1) % props.jsondata.length);
-      props.setCurrentTime("0");
+    props.setCurrentTime("0");
     changeRange();
     props.progressBar.current.style.setProperty("--seek-before-width", `0%`);
     if (!prevValue) {
@@ -116,7 +116,7 @@ const Control = (props) => {
     }
   };
   const skipSongBackward = () => {
-    props.setAuto(true)
+    props.setAuto(true);
     shuffle == "#d95117"
       ? props.setCurrentIndex(shuffleOn)
       : props.setCurrentIndex(
@@ -151,7 +151,7 @@ const Control = (props) => {
 
   const shuffleSong = () => {
     setShuffle("#d95117");
-    if (shuffle == "#d95117") {
+    if (shuffle === "#d95117") {
       setShuffle("#a2a4a7");
     }
   };
@@ -161,7 +161,7 @@ const Control = (props) => {
       return <IoVolumeHigh />;
     } else if (props.audioPlayer?.current?.volume > 0.4) {
       return <IoVolumeMedium />;
-    } else if (props.audioPlayer?.current?.volume == 0) {
+    } else if (props.audioPlayer?.current?.volume === 0) {
       return <IoVolumeMute />;
     } else {
       return <IoVolumeLow />;
@@ -173,7 +173,7 @@ const Control = (props) => {
 
   const loopsong = () => {
     setLoop("#d95117");
-    if (loop == "#d95117") {
+    if (loop === "#d95117") {
       setLoop("#a2a4a7");
     }
   };
@@ -200,7 +200,7 @@ const Control = (props) => {
           <div className="music-button">
             <button
               className="btn-center"
-              title={shuffle == "#d95117" ? "shuffle on" : "shuffle off"}
+              title={shuffle === "#d95117" ? "shuffle on" : "shuffle off"}
               onClick={shuffleSong}
               style={{ color: shuffle }}
             >
@@ -245,11 +245,11 @@ const Control = (props) => {
 
             <button
               className="btn-center"
-              title={loop == "#d95117" ? "Loop once" : "Loop all"}
+              title={loop === "#d95117" ? "Loop once" : "Loop all"}
               style={{ color: loop }}
               onClick={loopsong}
             >
-              {loop == "#a2a4a7" ? <MdRepeat /> : <MdRepeatOne />}
+              {loop === "#a2a4a7" ? <MdRepeat /> : <MdRepeatOne />}
             </button>
           </div>
           <p className="start-time">{calculateTime(props.currentTime)}</p>
@@ -269,8 +269,8 @@ const Control = (props) => {
                 calculateTime(props.duration)
               : "00:00"}
           </p>
-          <button className="btn-right">
-            <Volumeicon title="Volume" />
+          <button className="btn-right" title="Volume">
+            <Volumeicon />
           </button>
           <div className="right-element">
             <input

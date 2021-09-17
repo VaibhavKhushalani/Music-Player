@@ -3,6 +3,7 @@ import Control from "./Control";
 import jsondata from "./s.json";
 import Sidebar from "./Sidebar";
 import MusicList from "./MusicList";
+import MiddleComp from "./MiddleComp";
 
 
 const Player = () => {
@@ -28,8 +29,7 @@ const Player = () => {
   return (
     <>
    
-     <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc} autoPlay={auto} />
-
+     <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc} autoPlay={auto}  />
 
 
 
@@ -38,10 +38,12 @@ const Player = () => {
 
       
       <MusicList jsondata= {jsondata} audioPlayer={audioPlayer} progressBar={progressBar} animationRef={animationRef} isPlaying= {isPlaying} setIsPlaying={setIsPlaying} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}  rotate={rotate} setRotate={setRotate} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} setAuto={setAuto}/>
-
+      
+      <MiddleComp  jsondata= {jsondata}/>
 
 
       <Control jsondata= {jsondata} audioPlayer={audioPlayer} progressBar={progressBar} animationRef={animationRef} isPlaying= {isPlaying} setIsPlaying={setIsPlaying} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}  rotate={rotate} setRotate={setRotate} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} setAuto={setAuto} />
+     
     </>
   );
 };

@@ -1,7 +1,23 @@
-import React from "react";
+import React,{useState}from "react";
 import "./Player.css";
+import {IoClose} from "react-icons/io5"
+import {BsMusicNoteList} from "react-icons/bs"
+
 
 const MusicList = (props) => {
+  const [show, setShow] =useState('block')
+ 
+  const Closelist =()=>{
+setShow('none')
+if (show=='none'){
+  setShow('block')
+}
+
+  } 
+
+
+
+
   const whilePlaying = () => {
     props.progressBar.current.value = props.audioPlayer.current.currentTime;
     changePlayerCurrentTime();
@@ -34,10 +50,16 @@ const MusicList = (props) => {
     }
   };
 
+  if (show=='none'){
+    return (
+      <spam><button className="btn-listClose" title="Music-List" onClick={Closelist}><BsMusicNoteList/></button></spam>
+    )
+  }else{
   return (
     <>
-      <div className="List-container">
-        <div className="sidebar-logo">Trending Albums</div>
+  
+      <div className="List-container" style={{display: show}}>
+        <div className="sidebar-logo">Music List<spam><button onClick={Closelist} className="btn-list" title="Close"><IoClose/></button></spam></div>
 
         {props.jsondata.map((data, id) => {
           return (
@@ -55,7 +77,7 @@ const MusicList = (props) => {
         })}
       </div>
     </>
-  );
+  )}
 };
 
 export default MusicList;
