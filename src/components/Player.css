@@ -18,10 +18,30 @@
     background-color:#d95117
   }
   @media screen and (max-width: 769px) {
-    body {
+    .audioControl ,.List-container ,.MiddleComp ,.sidebar-container,.btn-listClose{
      display: none
     }
   }
+  @media screen and (max-width: 769px) {
+    .Hideview{
+      font-size: 20px;
+      text-align: center;
+      height: 100vh;
+      color: rgb(255, 255, 255);
+      display: flex;
+      justify-content: center;
+      padding-top: 50%;
+      padding-bottom: 50%;
+  
+    }
+  }
+  @media screen and (min-width: 769px) {
+    .Hideview{
+    display: none;
+  
+    }
+  }
+  
 /* Player css */
 .audioControl {
   width: 100%;

@@ -30,7 +30,7 @@ const Player = () => {
     <>
    
      <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc} autoPlay={auto}  />
-
+<div className="Hideview"><center>Mobile version Coming Soon😉</center></div>
 
 
      
