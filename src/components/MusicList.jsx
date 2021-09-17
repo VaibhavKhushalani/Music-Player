@@ -5,7 +5,7 @@ import {BsMusicNoteList} from "react-icons/bs"
 
 
 const MusicList = (props) => {
-  const [show, setShow] =useState('block')
+  const [show, setShow] =useState('none')
  
   const Closelist =()=>{
 setShow('none')
