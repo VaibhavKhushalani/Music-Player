@@ -7,8 +7,16 @@ import MiddleComp from "./MiddleComp";
 
 
 const Player = () => {
+  function randomNumber(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  let shuffleOn = randomNumber(0, jsondata.length - 1);
+
+
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(shuffleOn);
   const [rotate, setRotate] = useState("none");
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -29,9 +37,8 @@ const Player = () => {
   return (
     <>
    
-     <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc} autoPlay={auto}  />
+     <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc}  autoPlay={auto}  />
 <div className="Hideview"><center>Mobile version Coming Soon😉</center></div>
-
 
      
       <Sidebar />

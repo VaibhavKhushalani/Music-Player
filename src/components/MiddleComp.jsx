@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useEffect} from "react";
 import { Card,Row, Col, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 const MiddleComp = (props) => {
@@ -33,6 +33,8 @@ if (e.target.id) {
   }
 }
 }
+
+
 
   return (
     <>

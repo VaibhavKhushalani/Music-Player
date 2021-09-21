@@ -18,6 +18,7 @@ const Control = (props) => {
   const [volslider, setVolslider] = useState(8);
   const [shuffle, setShuffle] = useState(false);
   const [loop, setLoop] = useState("#a2a4a7");
+  const [volume, setVolume] = useState(1)
   const volumeRange = useRef();
 
   //random No Generator
@@ -33,10 +34,8 @@ const Control = (props) => {
     props.setDuration(seconds);
     props.progressBar.current.max = seconds;
     props.animationRef.current = requestAnimationFrame(whilePlaying);
-  }, [
-    props.audioPlayer?.current?.loadedmetadata,
-    props.audioPlayer?.current?.readyState,
-  ]);
+  },[props.audioPlayer?.current?.loadedmetadata,
+    props.audioPlayer?.current?.readyState]);
 
   const calculateTime = (secs) => {
     const minutes = Math.floor(secs / 60);
@@ -54,6 +53,7 @@ const Control = (props) => {
 
   const prevValue = props.isPlaying;
   const TooglePlayPause = () => {
+    
     props.setIsPlaying(!prevValue);
     props.setAuto(true);
     if (!prevValue) {
@@ -74,10 +74,16 @@ const Control = (props) => {
       "--seek-before-width",
       `${finalVolume.toFixed(0)}%`
     );
-    let volume = finalVolume.toFixed(0) * 0.125;
-    props.audioPlayer.current.volume = volume;
+    console.log(navigator.mediaSession)
+    setVolume(finalVolume.toFixed(0) * 0.125)
+   
   };
 
+  useEffect(() => {
+  props.audioPlayer.current.volume = volume;
+  },[volume]);
+
+  
   const changeRange = () => {
     props.audioPlayer.current.currentTime = props.progressBar.current.value;
     changePlayerCurrentTime();
@@ -178,6 +184,44 @@ const Control = (props) => {
     }
   };
 
+
+  if ("mediaSession" in navigator) {
+    
+    navigator.mediaSession.metadata = new window.MediaMetadata({
+      title:  props.jsondata[props.currentIndex].name,
+      artist: props.jsondata[props.currentIndex].singer,
+     
+      artwork: [
+        { src: props.jsondata[props.currentIndex].cover, },
+      ]
+    });
+  
+    // TODO: Update playback state.
+  }
+  navigator.mediaSession.setActionHandler('play', () => {
+    // Play previous track.
+    TooglePlayPause()
+  });
+  navigator.mediaSession.setActionHandler('pause', () => {
+    // Play previous track.
+    TooglePlayPause()
+  });
+  navigator.mediaSession.setActionHandler('previoustrack', () => {
+    // Play previous track.
+    skipSongBackward()
+  });
+
+  navigator.mediaSession.setActionHandler('nexttrack', () => {
+    // Play next track.
+    skipSongForward()
+  });
+
+
+  navigator.mediaSession.setActionHandler('stop', () => {
+    // Stop playback and clear state if appropriate.
+    TooglePlayPause()
+  });
+
   return (
     <>
       <div className="audioControl">
@@ -189,7 +233,7 @@ const Control = (props) => {
             className="cover-image"
           />
           <p className="music-Title">
-            {props.jsondata[props.currentIndex].name}
+            {props.jsondata[props.currentIndex].name.slice(0,27)}
             <br />{" "}
             <span className="music-singer">
               {" "}
