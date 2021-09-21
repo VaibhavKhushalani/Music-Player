@@ -74,7 +74,6 @@ const Control = (props) => {
       "--seek-before-width",
       `${finalVolume.toFixed(0)}%`
     );
-    console.log(navigator.mediaSession)
     setVolume(finalVolume.toFixed(0) * 0.125)
    
   };
@@ -216,6 +215,15 @@ const Control = (props) => {
     skipSongForward()
   });
 
+
+  navigator.mediaSession.setActionHandler('seekforward',() => {
+    forwardThirty()
+  });
+
+
+  navigator.mediaSession.setActionHandler('seekbackward',() => {
+    backThirty()
+  });
 
   navigator.mediaSession.setActionHandler('stop', () => {
     // Stop playback and clear state if appropriate.
