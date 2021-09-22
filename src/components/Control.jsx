@@ -16,7 +16,7 @@ import { MdRepeat, MdRepeatOne } from "react-icons/md";
 
 const Control = (props) => {
   const [volslider, setVolslider] = useState(8);
-  const [shuffle, setShuffle] = useState(false);
+  const [shuffle, setShuffle] = useState("#d95117");
   const [loop, setLoop] = useState("#a2a4a7");
   const [volume, setVolume] = useState(1)
   const volumeRange = useRef();

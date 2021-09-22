@@ -4,7 +4,8 @@ import jsondata from "./s.json";
 import Sidebar from "./Sidebar";
 import MusicList from "./MusicList";
 import MiddleComp from "./MiddleComp";
-
+import { Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Player = () => {
   function randomNumber(min, max) {
@@ -32,13 +33,24 @@ const Player = () => {
     
   }, []);
 
- 
+  function Contact() {
+
+    if (window.screen.width < 769) {
+      window.location.href = "https://play.google.com/store/apps/details?id=com.dheerajapps.jesussongshindi";
+    }
+  }  
 
   return (
     <>
    
      <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc}  autoPlay={auto}  />
-<div className="Hideview"><center>Mobile version Coming Soon😉</center></div>
+
+<div className="Hideview"><center>Mobile Version Available Here😉 
+{Contact()}
+<br/>
+<br/>
+<Button variant="secondary" onClick={ () => window.location.href = "https://play.google.com/store/apps/details?id=com.dheerajapps.jesussongshindi"}>Click Me</Button>
+  </center></div>
 
      
       <Sidebar />

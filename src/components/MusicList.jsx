@@ -68,7 +68,7 @@ if (show=='none'){
                 <li>
                   <a href="##" type="button" id={id} onClick={Playmusic}>
                     {data.id} &nbsp; {data.name}
-                    <span className="detail-List">By- {data.singer}</span>
+                    {/* <span className="detail-List">By- {data.singer}</span> */}
                   </a>
                 </li>
               </ul>
