@@ -189,6 +189,7 @@ const Control = (props) => {
     navigator.mediaSession.metadata = new window.MediaMetadata({
       title:  props.jsondata[props.currentIndex].name,
       artist: props.jsondata[props.currentIndex].singer,
+      album:"Music Player",
      
       artwork: [
         { src: props.jsondata[props.currentIndex].cover, },
