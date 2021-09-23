@@ -668,7 +668,6 @@ z-index: 3;
 .MusicList-navigation li a:hover .detail-List {
   display: block;
   transition: all 1s ease-in-out;
-
 }
 
 /* MiddleComp Css */
