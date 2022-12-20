@@ -18,7 +18,6 @@ const Control = (props) => {
   const [volslider, setVolslider] = useState(8);
   const [shuffle, setShuffle] = useState("#d95117");
   const [loop, setLoop] = useState("#a2a4a7");
-  const [volume, setVolume] = useState(1)
   const volumeRange = useRef();
 
   //random No Generator
@@ -34,8 +33,10 @@ const Control = (props) => {
     props.setDuration(seconds);
     props.progressBar.current.max = seconds;
     props.animationRef.current = requestAnimationFrame(whilePlaying);
-  },[props.audioPlayer?.current?.loadedmetadata,
-    props.audioPlayer?.current?.readyState]);
+  }, [
+    props.audioPlayer?.current?.loadedmetadata,
+    props.audioPlayer?.current?.readyState,
+  ]);
 
   const calculateTime = (secs) => {
     const minutes = Math.floor(secs / 60);
@@ -53,7 +54,6 @@ const Control = (props) => {
 
   const prevValue = props.isPlaying;
   const TooglePlayPause = () => {
-    
     props.setIsPlaying(!prevValue);
     props.setAuto(true);
     if (!prevValue) {
@@ -68,21 +68,17 @@ const Control = (props) => {
   };
 
   const changeVolume = (e) => {
-    setVolslider(e.target.valueAsNumber);
-    let finalVolume = volslider ** 1;
+    let vol = e.target.valueAsNumber;
+    setVolslider(vol);
+    let finalVolume = vol ** 1;
     volumeRange.current.style.setProperty(
       "--seek-before-width",
       `${finalVolume.toFixed(0)}%`
     );
-    setVolume(finalVolume.toFixed(0) * 0.125)
-   
+    let result = finalVolume.toFixed(0) * 0.125;
+    props.audioPlayer.current.volume = result;
   };
 
-  useEffect(() => {
-  props.audioPlayer.current.volume = volume;
-  },[volume]);
-
-  
   const changeRange = () => {
     props.audioPlayer.current.currentTime = props.progressBar.current.value;
     changePlayerCurrentTime();
@@ -183,52 +179,46 @@ const Control = (props) => {
     }
   };
 
-
   if ("mediaSession" in navigator) {
-    
     navigator.mediaSession.metadata = new window.MediaMetadata({
-      title:  props.jsondata[props.currentIndex].name,
+      title: props.jsondata[props.currentIndex].name,
       artist: props.jsondata[props.currentIndex].singer,
-      album:"Music Player",
-     
-      artwork: [
-        { src: props.jsondata[props.currentIndex].cover, },
-      ]
+      album: "Music Player",
+
+      artwork: [{ src: props.jsondata[props.currentIndex].cover }],
     });
-  
+
     // TODO: Update playback state.
   }
-  navigator.mediaSession.setActionHandler('play', () => {
+  navigator.mediaSession.setActionHandler("play", () => {
     // Play previous track.
-    TooglePlayPause()
+    TooglePlayPause();
   });
-  navigator.mediaSession.setActionHandler('pause', () => {
+  navigator.mediaSession.setActionHandler("pause", () => {
     // Play previous track.
-    TooglePlayPause()
+    TooglePlayPause();
   });
-  navigator.mediaSession.setActionHandler('previoustrack', () => {
+  navigator.mediaSession.setActionHandler("previoustrack", () => {
     // Play previous track.
-    skipSongBackward()
+    skipSongBackward();
   });
 
-  navigator.mediaSession.setActionHandler('nexttrack', () => {
+  navigator.mediaSession.setActionHandler("nexttrack", () => {
     // Play next track.
-    skipSongForward()
+    skipSongForward();
   });
 
-
-  navigator.mediaSession.setActionHandler('seekforward',() => {
-    forwardThirty()
+  navigator.mediaSession.setActionHandler("seekforward", () => {
+    forwardThirty();
   });
 
-
-  navigator.mediaSession.setActionHandler('seekbackward',() => {
-    backThirty()
+  navigator.mediaSession.setActionHandler("seekbackward", () => {
+    backThirty();
   });
 
-  navigator.mediaSession.setActionHandler('stop', () => {
+  navigator.mediaSession.setActionHandler("stop", () => {
     // Stop playback and clear state if appropriate.
-    TooglePlayPause()
+    TooglePlayPause();
   });
 
   return (
@@ -242,7 +232,7 @@ const Control = (props) => {
             className="cover-image"
           />
           <p className="music-Title">
-            {props.jsondata[props.currentIndex].name.slice(0,27)}
+            {props.jsondata[props.currentIndex].name.slice(0, 27)}
             <br />{" "}
             <span className="music-singer">
               {" "}

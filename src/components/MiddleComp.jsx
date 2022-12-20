@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Card, Row, Col, Container } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 const MiddleComp = (props) => {
   const whilePlaying = () => {
     props.progressBar.current.value = props.audioPlayer.current.currentTime;

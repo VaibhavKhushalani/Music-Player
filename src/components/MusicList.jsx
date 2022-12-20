@@ -46,7 +46,7 @@ const MusicList = (props) => {
 
   if (show == "none") {
     return (
-      <spam>
+      <span>
         <button
           className="btn-listClose"
           title="Music-List"
@@ -54,7 +54,7 @@ const MusicList = (props) => {
         >
           <BsMusicNoteList />
         </button>
-      </spam>
+      </span>
     );
   } else {
     return (

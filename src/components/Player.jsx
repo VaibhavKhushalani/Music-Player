@@ -1,11 +1,10 @@
-import React,{ useState,useRef,useEffect} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Control from "./Control";
 import jsondata from "./s.json";
 import Sidebar from "./Sidebar";
 import MusicList from "./MusicList";
 import MiddleComp from "./MiddleComp";
 import { Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const Player = () => {
   function randomNumber(min, max) {
@@ -15,54 +14,110 @@ const Player = () => {
   }
   let shuffleOn = randomNumber(0, jsondata.length - 1);
 
-
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(shuffleOn);
   const [rotate, setRotate] = useState("none");
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [auto, setAuto] = useState(true)
+  const [auto, setAuto] = useState(true);
 
-    //reference
+  //reference
   const audioPlayer = useRef();
   const progressBar = useRef();
   const animationRef = useRef();
 
   useEffect(() => {
-  setAuto(false);
-    
+    setAuto(false);
   }, []);
 
   function Contact() {
-
     if (window.screen.width < 769) {
-      window.location.href = "https://play.google.com/store/apps/details?id=com.dheerajapps.jesussongshindi";
+      window.location.href =
+        "https://play.google.com/store/apps/details?id=com.dheerajapps.jesussongshindi";
     }
-  }  
+  }
 
   return (
     <>
-   
-     <audio ref={audioPlayer} src={jsondata[currentIndex].musicSrc}  autoPlay={auto}  />
+      <audio
+        ref={audioPlayer}
+        src={jsondata[currentIndex].musicSrc}
+        autoPlay={auto}
+      />
 
-<div className="Hideview"><center>Mobile Version Available Here😉 
-{Contact()}
-<br/>
-<br/>
-<Button variant="secondary" onClick={ () => window.location.href = "https://play.google.com/store/apps/details?id=com.dheerajapps.jesussongshindi"}>Click Me</Button>
-  </center></div>
+      <div className="Hideview">
+        <center>
+          Mobile Version Available Here😉
+          {Contact()}
+          <br />
+          <br />
+          <Button
+            variant="secondary"
+            onClick={() =>
+              (window.location.href =
+                "https://play.google.com/store/apps/details?id=com.dheerajapps.jesussongshindi")
+            }
+          >
+            Click Me
+          </Button>
+        </center>
+      </div>
 
-     
       <Sidebar />
 
-      
-      <MusicList jsondata= {jsondata} audioPlayer={audioPlayer} progressBar={progressBar} animationRef={animationRef} isPlaying= {isPlaying} setIsPlaying={setIsPlaying} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}  rotate={rotate} setRotate={setRotate} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} setAuto={setAuto}/>
-      
-      <MiddleComp jsondata= {jsondata} audioPlayer={audioPlayer} progressBar={progressBar} animationRef={animationRef} isPlaying= {isPlaying} setIsPlaying={setIsPlaying} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}  rotate={rotate} setRotate={setRotate} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} setAuto={setAuto}/>
+      <MusicList
+        jsondata={jsondata}
+        audioPlayer={audioPlayer}
+        progressBar={progressBar}
+        animationRef={animationRef}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+        rotate={rotate}
+        setRotate={setRotate}
+        duration={duration}
+        setDuration={setDuration}
+        currentTime={currentTime}
+        setCurrentTime={setCurrentTime}
+        setAuto={setAuto}
+      />
 
+      <MiddleComp
+        jsondata={jsondata}
+        audioPlayer={audioPlayer}
+        progressBar={progressBar}
+        animationRef={animationRef}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+        rotate={rotate}
+        setRotate={setRotate}
+        duration={duration}
+        setDuration={setDuration}
+        currentTime={currentTime}
+        setCurrentTime={setCurrentTime}
+        setAuto={setAuto}
+      />
 
-      <Control jsondata= {jsondata} audioPlayer={audioPlayer} progressBar={progressBar} animationRef={animationRef} isPlaying= {isPlaying} setIsPlaying={setIsPlaying} currentIndex={currentIndex} setCurrentIndex={setCurrentIndex}  rotate={rotate} setRotate={setRotate} duration={duration} setDuration={setDuration} currentTime={currentTime} setCurrentTime={setCurrentTime} setAuto={setAuto} />
-     
+      <Control
+        jsondata={jsondata}
+        audioPlayer={audioPlayer}
+        progressBar={progressBar}
+        animationRef={animationRef}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+        rotate={rotate}
+        setRotate={setRotate}
+        duration={duration}
+        setDuration={setDuration}
+        currentTime={currentTime}
+        setCurrentTime={setCurrentTime}
+        setAuto={setAuto}
+      />
     </>
   );
 };
