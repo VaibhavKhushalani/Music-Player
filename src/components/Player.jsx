@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Control from "./Control";
-import jsondata from "./s.json";
+import jsondata from "./songsList.json";
 import Sidebar from "./Sidebar";
 import MusicList from "./MusicList";
 import MiddleComp from "./MiddleComp";

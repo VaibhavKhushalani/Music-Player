@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Card, Row, Col, Container } from "react-bootstrap";
 const MiddleComp = (props) => {
   const whilePlaying = () => {
