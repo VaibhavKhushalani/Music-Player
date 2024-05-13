@@ -1,10 +1,10 @@
 import Player from "./components/Player";
-import {Route} from "react-router-dom";
+import { Route } from "react-router-dom";
+
 const App = () => {
   return (
     <>
-      <Route  path="/" component={Player} />
-     
+      <Route path="/" component={Player} />
     </>
   );
 };

@@ -43,7 +43,7 @@ const MiddleComp = (props) => {
           <Row>
             {props.jsondata.slice(0, 102).map((data, id) => {
               return (
-                <Col xs={2}>
+                <Col xs={2} key={id}>
                   <Card>
                     <Card.Img
                       id={id}

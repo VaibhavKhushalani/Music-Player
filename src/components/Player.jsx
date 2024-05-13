@@ -12,8 +12,8 @@ const Player = () => {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-  let shuffleOn = randomNumber(0, jsondata.length - 1);
 
+  const shuffleOn = randomNumber(0, jsondata.length - 1);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(shuffleOn);
   const [rotate, setRotate] = useState("none");
